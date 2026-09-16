@@ -47,9 +47,9 @@ function addTaskItem(taskText) {
 
     document.getElementById("taskList").appendChild(li);
     
-    // //call createDoneButton () function
-    // const doneBtn = createDoneButton(li);
-    // li.appendChild(doneBtn);
+    //call createDoneButton () function
+    const doneBtn = createDoneButton(li);
+    li.appendChild(doneBtn);
 
     // //call createEditButton () function
     // const editBtn = createEditButton(li);
@@ -59,7 +59,7 @@ function addTaskItem(taskText) {
     // const deleteBtn = createDeleteButton(li);
     // li.appendChild(deleteBtn);
 }
-/*
+
 function createDoneButton(li) {
     const doneBtn = document.createElement("button");
     doneBtn.textContent = "Done";
@@ -72,7 +72,7 @@ function createDoneButton(li) {
     };
     return doneBtn;
 }
-
+/*
 function createEditButton(li,taskSpan) {
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
