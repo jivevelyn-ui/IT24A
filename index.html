@@ -51,9 +51,9 @@ function addTaskItem(taskText) {
     const doneBtn = createDoneButton(li);
     li.appendChild(doneBtn);
 
-    // //call createEditButton () function
-    // const editBtn = createEditButton(li);
-    // li.appendChild(editBtn);
+    //call createEditButton () function
+    const editBtn = createEditButton(li);
+    li.appendChild(editBtn);
 
     // //call createDeleteButton () function
     // const deleteBtn = createDeleteButton(li);
@@ -72,7 +72,7 @@ function createDoneButton(li) {
     };
     return doneBtn;
 }
-/*
+
 function createEditButton(li,taskSpan) {
     const editBtn = document.createElement("button");
     editBtn.textContent = "Edit";
@@ -81,7 +81,7 @@ function createEditButton(li,taskSpan) {
     return editBtn;
 
 }
-
+/*
 function handleEditClick(li) {
     const taskSpan = li.firstChild.textContent;
     const newText = prompt("Edit your task:");
