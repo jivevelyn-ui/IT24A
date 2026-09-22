@@ -3,112 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To-Do List</title>
+    <title>Maps</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIINf/4QbP5f4D3L9v0Vxq4L4yZ8fVhF4="
+          crossorigin=""/>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
 
     <style>
-        .done {
-            text-decoration: line-through;
-            color: gray;
+        #map {
+            height: 500px;
         }
     </style>
 </head>
 
 <body>
 
-    <h1>To-Do List</h1>
+    <h1>Simple Map</h1>
 
-    <input type="text"
-           id="taskInput"
-           placeholder="Enter a task">
+    <div id="map"></div>
 
-    <button onclick="addTask()">Add Task</button>
+    <script>
+        function initMap() {
 
-    <ul id="taskList"></ul>
+            const map = L.map('map').setView([8.360, 124.868], 17);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        }
 
-<script>
+        initMap();
+    </script>
 
-function getTasks() {
-    const input = document.getElementById("taskInput");
-    const text = input.value.trim();
-    
-    console.log("The input value is: " + input.value);
-    return text;
-}
-
-function addTask(){ 
-    const taskText = getTasks();
-    addTaskItem(taskText);
-}
-function addTaskItem(taskText) {
-    const li = document.createElement("li");
-    const taskSpan = document.createElement("span");
-    taskSpan.textContent = taskText;
-    li.appendChild(taskSpan);
-
-    document.getElementById("taskList").appendChild(li);
-    
-    //call createDoneButton () function
-    const doneBtn = createDoneButton(li);
-    li.appendChild(doneBtn);
-
-    //call createEditButton () function
-    const editBtn = createEditButton(li);
-    li.appendChild(editBtn);
-
-    //call createDeleteButton () function
-    const deleteBtn = createDeleteButton(li);
-    li.appendChild(deleteBtn);
-}
-
-function createDoneButton(li) {
-    const doneBtn = document.createElement("button");
-    doneBtn.textContent = "Done";
-    doneBtn.style.marginLeft = "8px";
-    doneBtn.onclick = () => {
-    
-        li.classList.add("done");
-        doneBtn.disabled = true;
-        console.log("Task marked as done:", li.textContent, new Date());
-    };
-    return doneBtn;
-}
-
-function createEditButton(li,taskSpan) {
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Edit";
-    editBtn.style.marginLeft = "8px";
-    editBtn.onclick = () => handleEditClick(li);
-    return editBtn;
-
-}
-
-function handleEditClick(li) {
-    const taskSpan = li.firstChild.textContent;
-    const newText = prompt("Edit your task:");
-
-    if (newText !== null && newText.trim() !== "") {
-        li.firstChild.textContent = newText.trim();
-        alert("Updated task");
-    } else {
-        alert("No changes made");
-    }
-
-}
-
-function createDeleteButton(li) {
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
-    deleteBtn.style.marginLeft = "8px";
-    deleteBtn.onclick = () => handleDeleteClick(li);
-    return deleteBtn;
-}
-
-function handleDeleteClick(li) {
-    li.remove();
-    alert("Task deleted");
-}
-
-
-</script>
 </body>
 </html>
+
