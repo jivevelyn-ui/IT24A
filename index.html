@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Maps</title>
 
     <!-- Leaflet CSS -->
@@ -19,7 +16,6 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
 </head>
-
 <style>
     #map {
         height: 800px;
@@ -31,27 +27,18 @@
         object-fit: fill;
     }
 </style>
-
 <body>
-
     <h1>Simple Map</h1>
-
     <div id="map"></div>
-
 </body>
-
 <script>
-
     function initMap() {
-
         // Render map
         const map = L.map('map').setView([8.360, 124.868], 17);
-
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-
 
         // Render pins
         const mapDataUrl = 'campus.map.json';
@@ -61,7 +48,6 @@
             .then(data => {
 
                 data.forEach(pin => {
-
                     const marker = L.marker([pin.lat, pin.long]).addTo(map);
 
                     const image = `<img src="${pin.img}" class="popup-image">`;
