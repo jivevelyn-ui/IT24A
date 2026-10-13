@@ -35,14 +35,25 @@
     function initMap() {
         // Render map
         const map = L.map('map').setView([8.360, 124.868], 17);
-        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+
 
         // Render pins
         const mapDataUrl = 'campus.map.json';
 
+        //OpenStreetMap Layer
+        const openStreetMap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        });
+
+        //satellite Layer
+        const satellite = L.tileLayer(
+        'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+        {attribution: 'Tiles (c) Esri -, Maxar, Earthstar Geographics, & GIS User Community'
+        });
+        
+        satellite.addTo(map);
+        
         fetch(mapDataUrl)
             .then(response => response.json())
             .then(data => {
@@ -60,6 +71,13 @@
 
                 });
 
+                //layer control
+                const baseMaps = {
+                    "OpenStreetMap": openStreetMap,
+                    "Satellite": satellite
+                }
+
+                L.control.layers(baseMaps).addTo(map);
             });
 
     }
