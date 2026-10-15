@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <title>Activity 2</title>
+    <script>
+        function myFunction(){
+            var txt;
+            var fullName = prompt("Full name :", "Enter lastname, firstname here");
+            if (fullName == null || fullName == "") {
+                txt = "The field is required!";
+            } else {
+                txt = "Hello " + fullName + "! How are you today?";
+            }
+        }
+
+        function myFunc2(){
+            let txt2 = "You are mine.";
+            document.getElementById("mine").innerHTML = txt2;
+        }
+    </script>
+    </head>
+    <body>
+        
+        <h2>JavaScript Promt</h2>
+        <buttton onclick="myFunction()">Click here!</buttton>
+        <button onclick="myFunc2()">Click here 2!</button>
+        <p id="display">???</p> <!--Display output here-->
+        <p id="mine"></p>
+        </body>
+</html>
