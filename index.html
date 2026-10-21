@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Map</title>
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .container {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        #locations {
+            width: 250px;
+            flex-shrink: 0;
+        }
+
+        #location-list {
+            border: 1px solid #ddd;
+        }
+
+        .location {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+
+        .location:hover {
+            background: #eee;
+        }
+
+        #map {
+            height: 600px;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .popup-image {
+            max-width: 200px;
+            max-height: 150px;
+            height: auto;
+            display: block;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 650px) {
+            .container {
+                flex-direction: column;
+            }
+
+            #locations {
+                width: 100%;
+            }
+
+            #map {
+                width: 100%;
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Simple Campus Map</h1>
+
+    <div class="container">
+        <div id="locations">
+            <h2>Locations</h2>
+            <div id="location-list"></div>
+        </div>
+
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        function initMap() {
+            // Initialize the map
+            const map = L.map("map").setView(
+                [8.360, 124.868],
+                17
+            );
+
+            // OpenStreetMap layer
+            const openStreetMap = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                    maxZoom: 19,
+                    attribution:
+                        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }
+            );
+
+            // Satellite layer
+            const satellite = L.tileLayer(
+                "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+                {
+                    attribution:
+                        "Tiles &copy; Esri and its imagery providers"
+                }
+            );
+
+            // Start with satellite imagery
+            satellite.addTo(map);
+
+            // Layer control: add only once
+            const baseMaps = {
+                "OpenStreetMap": openStreetMap,
+                "Satellite": satellite
+            };
+
+            L.control.layers(baseMaps).addTo(map);
+
+            // Load location data
+            fetch("campus.map.json")
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Could not load campus.map.json");
+                    }
+
+                    return response.json();
+                })
+                .then(data => {
+                    const locationList =
+                        document.getElementById("location-list");
+
+                    data.forEach(pin => {
+                        // Add marker
+                        const marker = L.marker([pin.lat,pin.long]).addTo(map);
+
+                        // FLYTO Create popup
+                        const popupContent = document.createElement("div");
+
+                        const title = document.createElement("strong");
+                        title.textContent = pin.title;
+                        popupContent.appendChild(title);
+
+                        if (pin.img) {
+                            const image = document.createElement("img");
+                            image.src = pin.img;
+                            image.alt = pin.title;
+                            image.className = "popup-image";
+                            popupContent.appendChild(image);
+                        }
+
+                        marker.bindPopup(popupContent);
+
+                        // flyto  Add location to the list
+                        const item = document.createElement("div");
+                        item.className = 'location';
+                        item.textContent = pin.title;
+
+                        item.addEventListener("click", () => {
+                            map.flyTo([pin.lat, pin.long],18);
+                            marker.openPopup();
+                        });
+
+                        locationList.appendChild(item);
+                    });
+                })
+                .catch(error => {
+                    console.error("Map error:", error);
+
+                    document.getElementById("location-list")
+                        .textContent =
+                        "";
+                });
+        }
+
+        initMap();
+    </script>
+</body>
+</html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maps</title>
+
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+
+</head>
+<style>
+        #map {
+            height:800px;
+        }
+</style>  
+<body>
+    <h1>Simple Map</h1>
+    <div id="map"></div>
+</body>
+<script>
+
+        function initMap() {
+
+            const map = L.map('map').setView([8.360, 124.868], 17);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        }
+
+        initMap();
+</script>
+</html>
+
+>>>>>>> 5f29f667e1d7dcaf160328eb777c25b1f6401cfb
