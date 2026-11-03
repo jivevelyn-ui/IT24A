@@ -1,0 +1,596 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Chickenverse | A Universe of Fried Chicken</title>
+  <meta name="description" content="Explore Chickenverse, a fictional chicken discovery website featuring six chicken favorites.">
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Leaflet map styles -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  >
+</head>
+
+<body>
+
+  <!-- ================= HEADER ================= -->
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="Chickenverse home"><span class="brand-mark">✦</span>
+    <span class="brand-text">CHICKEN<span class="brand-accent">VERSE</span><small>A UNIVERSE OF FRIED CHICKEN</small></span></a>
+
+    <nav class="main-nav" aria-label="Main navigation"><a class="nav-link active" href="#home" data-page="home"aria-current="page">Home</a><a class="nav-link" href="#products" data-page="products">Products</a><a class="nav-link" href="#about" data-page="about">About Us</a>
+    </nav>
+  </header>
+
+
+  <main>
+
+    <!-- ================= HOME PAGE ================= -->
+    <section id="home" class="page-view active">
+
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">YOUR CRAVINGS. YOUR UNIVERSE.</p>
+
+          <h1>
+            Your Chicken Cravings Have Entered
+            <span>Another Universe.</span>
+          </h1>
+
+          <p class="hero-description">
+            From iconic chicken buckets to flavor-packed wings,
+            explore six chicken favorites in one delicious destination.
+          </p>
+
+          <a href="#products" class="primary-button">
+            Explore the Chickenverse <span>↗</span>
+          </a>
+
+          <div class="hero-note">
+            <span>✦</span> Six favorites. Endless cravings.
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+
+          <span class="planet planet-one">✦</span>
+          <span class="planet planet-two">✧</span>
+
+          <img
+            src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&amp;fit=crop&amp;w=1000&amp;q=85"
+            alt="Crispy golden fried chicken"
+            class="hero-food"
+          >
+
+          <div class="floating-label">
+            CRISPY
+            <strong>GOODNESS</strong>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- INTRODUCTION STRIP -->
+      <section class="intro-strip">
+        <span>🍗 CRISPY BITES</span>
+        <span>★ BIG FLAVOR</span>
+        <span>🌌 ONE CHICKENVERSE</span>
+        <span>🍗 CRISPY BITES</span>
+      </section>
+
+
+      <!-- CUSTOMER REVIEWS ARE PART OF HOME -->
+      <section class="testimonial section-padding">
+        <div class="section-heading">
+          <p class="eyebrow">WHAT CHICKEN LOVERS SAY</p>
+
+          <h2>Chickenverse <span>Reviews</span></h2>
+
+          <p>
+            Meet our fictional visitors and hear about their
+            chicken-loving experience.
+          </p>
+        </div>
+
+        <div class="testimonial-grid">
+
+          <article class="testimonial-card">
+            <div class="review-icon">🍗</div>
+
+            <div class="rating" aria-label="5 out of 5 stars">
+              ★★★★★
+            </div>
+
+            <h3>My Chicken Cravings, Solved!</h3>
+
+            <p>
+              "Finally, a place where all my fried chicken
+              favorites come together!"
+            </p>
+
+            <div class="review-author">
+              <span class="author-avatar">A</span>
+              <div>
+                <strong>Alex R.</strong>
+                <small>Chicken Enthusiast</small>
+              </div>
+            </div>
+          </article>
+
+
+          <article class="testimonial-card">
+            <div class="review-icon">🌟</div>
+
+            <div class="rating" aria-label="5 out of 5 stars">
+              ★★★★★
+            </div>
+
+            <h3>A Flavorful Journey!</h3>
+
+            <p>
+              "Chickenverse takes me on a delicious journey
+              through the world of chicken."
+            </p>
+
+            <div class="review-author">
+              <span class="author-avatar">S</span>
+              <div>
+                <strong>Sam K.</strong>
+                <small>Food Adventurer</small>
+              </div>
+            </div>
+          </article>
+
+
+          <article class="testimonial-card">
+            <div class="review-icon">❤️</div>
+
+            <div class="rating" aria-label="5 out of 5 stars">
+              ★★★★★
+            </div>
+
+            <h3>A Must-Visit for Chicken Lovers!</h3>
+
+            <p>
+              "I can't get enough of the variety and flavors
+              Chickenverse offers."
+            </p>
+
+            <div class="review-author">
+              <span class="author-avatar">J</span>
+              <div>
+                <strong>Jamie L.</strong>
+                <small>Culinary Explorer</small>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="fictional-note">
+          These testimonials are fictional examples created for
+          a student website.
+        </p>
+      </section>
+
+
+      <!-- HOME BANNER -->
+      <section class="quote-banner">
+        <span class="quote-star">✦</span>
+
+        <p>
+          One universe.
+          <strong>Endless chicken cravings.</strong>
+        </p>
+
+        <span class="quote-star">✦</span>
+      </section>
+
+    </section>
+
+
+    <!-- ================= PRODUCTS PAGE ================= -->
+    <section id="products" class="page-view products-section section-padding">
+
+      <div class="section-heading">
+        <p class="eyebrow">PICK YOUR FAVORITE</p>
+
+        <h1>Six Stars of the <span>Chickenverse</span></h1>
+
+        <p>
+          Meet some well-known names in the world of chicken.
+          Which one would you try first?
+        </p>
+      </div>
+
+
+      <div class="product-grid">
+
+        <!-- PRODUCT 1 -->
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-number">01</span>
+
+            <img
+              src="images/jollibee bucket friedchicken.jpe"
+              alt="Jollibee Chickenjoy"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <p class="category">THE HAPPY CRUNCH</p>
+
+            <h2>Jollibee Chickenjoy</h2>
+
+            <p>
+              Golden, crispy fried chicken that's made for
+              a satisfying meal.
+            </p>
+
+            <p class="product-price">₱99.00</p>
+
+            <span class="brand-pill">Jollibee</span>
+          </div>
+        </article>
+
+
+        <!-- PRODUCT 2 -->
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-number">02</span>
+
+            <img
+              src="images/mcdo box friedchicken.jpe"
+              alt="McDonald's fried chicken"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <p class="category">THE CLASSIC BITE</p>
+
+            <h2>McDonald's Chicken</h2>
+
+            <p>
+              A familiar fast-food favorite for your
+              chicken cravings.
+            </p>
+
+            <p class="product-price">₱99.00</p>
+
+            <span class="brand-pill">McDonald's</span>
+          </div>
+        </article>
+
+
+        <!-- PRODUCT 3 -->
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-number">03</span>
+
+            <img
+              src="images/kfc bucket friedchicken.jpe"
+              alt="KFC chicken bucket"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <p class="category">THE FLAVOR LEGEND</p>
+
+            <h2>KFC Chicken Bucket</h2>
+
+            <p>
+              A bucket-style chicken favorite with a savory,
+              seasoned crunch.
+            </p>
+
+            <p class="product-price">₱199.00</p>
+
+            <span class="brand-pill">KFC</span>
+          </div>
+        </article>
+
+
+        <!-- PRODUCT 4 -->
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-number">04</span>
+
+            <img
+              src="images/popeyes bucket friedchicken.jpe"
+              alt="Popeyes fried chicken"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <p class="category">THE SOUTHERN CRUNCH</p>
+
+            <h2>Popeyes Fried Chicken</h2>
+
+            <p>
+              A crispy chicken pick for fans of bold flavors.
+            </p>
+
+            <p class="product-price">₱199.00</p>
+
+            <span class="brand-pill">Popeyes</span>
+          </div>
+        </article>
+
+
+        <!-- PRODUCT 5 -->
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-number">05</span>
+
+            <img
+              src="images/uncle jone chicken.jpe"
+              alt="Uncle John's fried chicken"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <p class="category">THE BUCKET FAVORITE</p>
+
+            <h2>Uncle John's Chicken</h2>
+
+            <p>
+              A crunchy chicken favorite for a quick and
+              satisfying meal.
+            </p>
+
+            <p class="product-price">₱89.00</p>
+
+            <span class="brand-pill">Uncle John's</span>
+          </div>
+        </article>
+
+
+        <!-- PRODUCT 6 -->
+        <article class="product-card">
+          <div class="product-image">
+            <span class="product-number">06</span>
+
+            <img
+              src="images/wingstop chicken.jpe"
+              alt="Wingstop chicken wings"
+              loading="lazy"
+            >
+          </div>
+
+          <div class="product-info">
+            <p class="category">THE WING ZONE</p>
+
+            <h2>Wingstop Wings</h2>
+
+            <p>
+              Chicken wings for anyone who loves a
+              saucy, flavor-packed bite.
+            </p>
+
+            <p class="product-price">₱179.00</p>
+
+            <span class="brand-pill">Wingstop</span>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="photo-note">
+        Prices are illustrative examples for this school project
+        and may not reflect current restaurant prices. Some photos
+        may be illustrative rather than official brand photography.
+        Chickenverse is a fictional student website and is not
+        affiliated with the listed brands.
+      </p>
+
+    </section>
+
+
+    <!-- ================= ABOUT US PAGE ================= -->
+    <section id="about" class="page-view about-section section-padding">
+
+      <div class="section-heading">
+        <p class="eyebrow">OUR LITTLE CORNER OF THE FOOD UNIVERSE</p>
+
+        <h1>Welcome to <span>Chickenverse.</span></h1>
+
+        <p>
+          A fun food discovery concept created for chicken lovers,
+          bringing familiar chicken favorites together in one place.
+        </p>
+      </div>
+
+
+      <!-- OWNERS' PHOTO: FULL IMAGE, NO CROPPING -->
+      <div class="owners-photo-wrap">
+
+        <img
+          src="images/Chickenverse Co-Founders Portrait.png"
+          alt="Chickenverse co-founders Maria Paul Ellis L. Balendez and Evelyn Jive G. Castillo"
+          class="owners-photo"
+          loading="lazy"
+        >
+
+        <div class="photo-caption">
+          <span>✦</span>
+          The women behind Chickenverse
+          <span>✦</span>
+        </div>
+
+      </div>
+
+
+      <!-- CO-FOUNDERS' INFORMATION -->
+      <div class="owners-info">
+
+        <article class="owner-card">
+          <div class="owner-number">01</div>
+
+          <p class="owner-role">Co-Founder &amp; Operations Lead</p>
+
+          <h2>Maria Paul Ellis L. Balendez</h2>
+
+          <p>
+            In this fictional business concept, Maria helps
+            organize daily operations, coordinate ideas, and
+            create a welcoming experience for every chicken lover.
+            She believes that good food brings people together
+            and makes ordinary moments more memorable.
+          </p>
+
+          <div class="owner-quote">
+            "Good food brings people together."
+          </div>
+        </article>
+
+
+        <article class="owner-card">
+          <div class="owner-number">02</div>
+
+          <p class="owner-role">Co-Founder &amp; Creative Director</p>
+
+          <h2>Evelyn Jive G. Castillo</h2>
+
+          <p>
+            In this fictional business concept, Evelyn helps
+            develop the Chickenverse brand, website presentation,
+            and creative direction. She enjoys turning simple
+            ideas into engaging designs that make discovering
+            chicken favorites fun and memorable.
+          </p>
+
+          <div class="owner-quote">
+            "Same passion. Bigger Chickenverse."
+          </div>
+        </article>
+
+      </div>
+
+
+      <!-- BUSINESS INFORMATION AND MAP -->
+      <div class="about-grid">
+
+        <article class="business-panel">
+          <p class="eyebrow">BUSINESS INFORMATION</p>
+
+          <h2>Meet the Universe</h2>
+
+          <div class="info-row">
+            <span class="info-icon">⌖</span>
+
+            <div>
+              <h3>Location</h3>
+              <p>Poblacion, Manolo Fortich, Bukidnon</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="info-icon">✉</span>
+
+            <div>
+              <h3>Email</h3>
+              <p>hello@chickenverse.example</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="info-icon">◷</span>
+
+            <div>
+              <h3>Business Hours</h3>
+              <p>Monday–Saturday · 9:00 AM–6:00 PM</p>
+            </div>
+          </div>
+
+          <div class="info-row">
+            <span class="info-icon">♡</span>
+
+            <div>
+              <h3>Our Mission</h3>
+              <p>
+                Celebrate chicken favorites and make discovering
+                them fun.
+              </p>
+            </div>
+          </div>
+
+          <p class="fictional-note">
+            Chickenverse, its business details, owner biographies,
+            and testimonials are fictional and intended for a
+            school project.
+          </p>
+        </article>
+
+
+        <article class="map-panel">
+          <div class="map-heading">
+            <div>
+              <p class="eyebrow">OUR EXAMPLE LOCATION</p>
+              <h2>Explore the Map</h2>
+            </div>
+
+            <span class="map-pin">⌖</span>
+          </div>
+
+          <div
+            id="map"
+            role="application"
+            aria-label="Example map location in Manolo Fortich, Bukidnon"
+          ></div>
+
+          <p class="map-caption">
+            Example coordinates in Manolo Fortich, Bukidnon.
+            This is not a verified Chickenverse business address.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="site-footer">
+
+    <a class="brand footer-brand" href="#home">
+      <span class="brand-mark">✦</span>
+
+      <span class="brand-text">
+        CHICKEN<span class="brand-accent">VERSE</span>
+        <small>A UNIVERSE OF FRIED CHICKEN</small>
+      </span>
+    </a>
+
+    <p>
+      Made for chicken lovers, across the universe.
+      © 2026 Chickenverse
+    </p>
+
+    <a href="#home" class="back-top">Back to Home ↑</a>
+
+  </footer>
+
+
+  <!-- Leaflet map script -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- Your JavaScript -->
+  <script src="script.js"></script>
+
+</body>
+</html>
