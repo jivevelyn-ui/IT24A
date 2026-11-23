@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <title>Weather Forecast App</title>
 </head>
 <body>
-    
+
     <h1>Weather Forecast Application</h1>
 
     <h2>Select Location</h2>
@@ -24,7 +25,85 @@
 
     <script>
 
-    const apiKey = "9a262c214ba051a758e71c562d21a2fe";
+        const apiKey = "9a262c214ba051a758e71c562d21a2fe";
+
+        async function getWeather() {
+
+            const city = prompt("Enter a city name");
+
+            if (!city) {
+                alert("No city entered");
+                return;
+            }
+
+            const url =
+                `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+            try {
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("City not found");
+                }
+
+                const data = await response.json();
+
+                getWeatherByCoordinates(
+                    data.coord.lat,
+                    data.coord.lon
+                );
+
+            } catch (error) {
+
+                alert("Error: " + error.message);
+
+            }
+        }
+
+        async function getGPSLocation() {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        getWeatherByCoordinates(
+                            position.coords.latitude,
+                            position.coords.longitude
+                        );
+                    },
+                    (error) => {
+                        alert("Error getting GPS location: " + error.message);
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        async function getWeatherByCoordinates(lat, lon) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+            try {
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error("Weather data not found");
+                }
+
+                const data = await response.json();
+
+                // Display weather information
+                document.getElementById("weatherResult").innerHTML = `
+                    <h3>Current Weather</h3>
+                    <p><strong>Temperature:</strong> ${data.main.temp}°C</p>
+                    <p><strong>Feels Like:</strong> ${data.main.feels_like}°C</p>
+                    <p><strong>Humidity:</strong> ${data.main.humidity}%</p>
+                    <p><strong>Wind Speed:</strong> ${data.wind.speed} m/s</p>
+                `;
+
+            } catch (error) {
+                alert("Error: " + error.message);
+            }
+        }
 
     </script>
 
