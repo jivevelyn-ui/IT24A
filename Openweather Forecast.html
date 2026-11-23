@@ -23,114 +23,173 @@
 
     <div id="forecastResult"></div>
 
-    <script>
+    
+<script>
 
-        const apiKey = "9a262c214ba051a758e71c562d21a2fe";
+    const apiKey = "9a262c214ba051a758e71c562d21a2fe";
 
-        async function getWeather() {
+    // MANUAL CITY SEARCH
+    async function getWeather() {
 
-            const city = prompt("Enter a city name");
+        const city = prompt("Enter a city name");
 
-            if (!city) {
-                alert("No city entered");
-                return;
-            }
-
-            const url =
-                `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
-
-            try {
-
-                const response = await fetch(url);
-
-                if (!response.ok) {
-                    throw new Error("City not found");
-                }
-
-                const data = await response.json();
-
-                getWeatherByCoordinates(
-                    data.coord.lat,
-                    data.coord.lon
-                );
-
-            } catch (error) {
-
-                alert("Error: " + error.message);
-
-            }
+        if (!city) {
+            alert("No city entered");
+            return;
         }
 
-        async function getGPSLocation() {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        getWeatherByCoordinates(
-                            position.coords.latitude,
-                            position.coords.longitude
-                        );
-                    },
-                    (error) => {
-                        alert("Error getting GPS location: " + error.message);
-                    }
-                );
-            } else {
-                alert("Geolocation is not supported by this browser.");
+        const url =
+            `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${apiKey}&units=metric`;
+
+        try {
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error("City not found");
             }
+
+            const data = await response.json();
+
+            getWeatherByCoordinates(
+                data.coord.lat,
+                data.coord.lon
+            );
+
+        } catch (error) {
+
+            alert("Error: " + error.message);
+
         }
+    }
 
-        
-async function getWeatherByCoordinates(latitude, longitude) {
 
-    const weatherUrl =
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    // GPS LOCATION
+    function getGPSLocation() {
 
-    const forecastUrl =
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-
-    try {
-
-        // Current Weather
-        const weatherResponse = await fetch(weatherUrl);
-
-        if (!weatherResponse.ok) {
-            throw new Error("Unable to retrieve weather");
+        if (!navigator.geolocation) {
+            alert("Geolocation is not supported by your browser.");
+            return;
         }
-
-        const data = await weatherResponse.json();
 
         document.getElementById("locationResult").innerHTML =
-            `Location: ${data.name}, ${data.sys.country}`;
+            "Getting your location...";
 
-        document.getElementById("weatherResult").innerHTML = `
+        navigator.geolocation.getCurrentPosition(
 
-            <h2>Current Weather</h2>
+            function(position) {
 
-            <h3>${data.name}, ${data.sys.country}</h3>
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
 
-            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+                getWeatherByCoordinates(latitude, longitude);
 
-            <p>Temperature: ${data.main.temp} °C</p>
+            },
 
-            <p>Weather: ${data.weather[0].description}</p>
+            function(error) {
 
-            <p>Humidity: ${data.main.humidity}%</p>
+                document.getElementById("locationResult").innerHTML = "";
 
-            <p>Wind Speed: ${data.wind.speed} m/s</p>
+                alert("GPS Error: " + error.message);
 
-        `;
+            }
 
-    } catch (error) {
-
-        alert("Error: " + error.message);
-
+        );
     }
-}
 
 
+    // CURRENT WEATHER AND FIVE-DAY FORECAST
+    async function getWeatherByCoordinates(latitude, longitude) {
+
+        const weatherUrl =
+            `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+        const forecastUrl =
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+        try {
+
+            // CURRENT WEATHER
+            const weatherResponse = await fetch(weatherUrl);
+
+            if (!weatherResponse.ok) {
+                throw new Error("Unable to retrieve weather");
+            }
+
+            const data = await weatherResponse.json();
+
+            document.getElementById("locationResult").innerHTML =
+                `Location: ${data.name}, ${data.sys.country}`;
+
+            document.getElementById("weatherResult").innerHTML = `
+
+                <h2>Current Weather</h2>
+
+                <h3>${data.name}, ${data.sys.country}</h3>
+
+                <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png">
+
+                <p>Temperature: ${data.main.temp} °C</p>
+
+                <p>Weather: ${data.weather[0].description}</p>
+
+                <p>Humidity: ${data.main.humidity}%</p>
+
+                <p>Wind Speed: ${data.wind.speed} m/s</p>
+
+            `;
 
 
-    </script>
+            // 5-DAY FORECAST
+            const forecastResponse = await fetch(forecastUrl);
+
+            if (!forecastResponse.ok) {
+                throw new Error("Unable to retrieve forecast");
+            }
+
+            const forecastData = await forecastResponse.json();
+
+            const forecastResult =
+                document.getElementById("forecastResult");
+
+            forecastResult.innerHTML = `
+                <h2>5-Day Weather Forecast</h2>
+            `;
+
+            // FILTER FORECAST AT 12:00 PM
+            forecastData.list
+                .filter(item => item.dt_txt.includes("12:00:00"))
+                .forEach(item => {
+
+                    forecastResult.innerHTML += `
+
+                        <hr>
+
+                        <h3>${item.dt_txt}</h3>
+
+                        <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png">
+
+                        <p>Temperature: ${item.main.temp} °C</p>
+
+                        <p>Weather: ${item.weather[0].description}</p>
+
+                        <p>Humidity: ${item.main.humidity}%</p>
+
+                        <p>Wind Speed: ${item.wind.speed} m/s</p>
+
+                    `;
+
+                });
+
+        } catch (error) {
+
+            alert("Error: " + error.message);
+
+        }
+    }
+
+</script>
+
 
 </body>
 </html>
