@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +27,6 @@
 
     const apiKey = "9a262c214ba051a758e71c562d21a2fe";
 
-    // MANUAL CITY SEARCH
     async function getWeather() {
 
         const city = prompt("Enter a city name");
@@ -63,8 +61,6 @@
         }
     }
 
-
-    // GPS LOCATION
     function getGPSLocation() {
 
         if (!navigator.geolocation) {
@@ -97,8 +93,6 @@
         );
     }
 
-
-    // CURRENT WEATHER AND FIVE-DAY FORECAST
     async function getWeatherByCoordinates(latitude, longitude) {
 
         const weatherUrl =
@@ -109,7 +103,6 @@
 
         try {
 
-            // CURRENT WEATHER
             const weatherResponse = await fetch(weatherUrl);
 
             if (!weatherResponse.ok) {
@@ -139,15 +132,11 @@
 
             `;
 
-
-           
-// 5-Day Forecast
 const forecastResponse = await fetch(forecastUrl);
 
 if (!forecastResponse.ok) {
     throw new Error("Unable to retrieve forecast");
 }
-
 const forecastData = await forecastResponse.json();
 
 const forecastResult =
@@ -156,7 +145,6 @@ const forecastResult =
 forecastResult.innerHTML = `
     <h2>5-Day Weather Forecast</h2>
 `;
-
 forecastData.list
     .filter(item => item.dt_txt.includes("12:00:00"))
     .forEach(item => {
@@ -178,15 +166,11 @@ forecastData.list
             <p>Wind Speed: ${item.wind.speed} m/s</p>
         `;
     });
-
-
-            // FILTER FORECAST AT 12:00 PM
             forecastData.list
                 .filter(item => item.dt_txt.includes("12:00:00"))
                 .forEach(item => {
 
                     forecastResult.innerHTML += `
-
                         <hr>
 
                         <h3>${item.dt_txt}</h3>
@@ -208,12 +192,8 @@ forecastData.list
         } catch (error) {
 
             alert("Error: " + error.message);
-
         }
     }
-
 </script>
-
-
 </body>
 </html>
